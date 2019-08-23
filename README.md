@@ -1,4 +1,4 @@
-# Micropython ESP8266 and DS18B20 "Open the Windows" DIY Sensor
+# Micropython ESP8266 and DS18B20 "Open the Windows" DIY Sensor with Push Notifications
 By Nathan Wells
 MIT License
 
