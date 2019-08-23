@@ -35,7 +35,7 @@ temp_offset = 6
 #Your time-zone (mine is in PST which is UTC-7) for example, Singapore would be: +(8*3600)
 time_zone = -(7*3600)
 #The pin that you are using for the DS18B20 sensor
-temperature_pin = 5
+temperature_pin = 0
 
 
 #Animated Sun Icon (so we can tell our script is running)
@@ -131,10 +131,19 @@ def file_exists(path):
     return exists
 
 #Connect Temp Sensor
-ds_pin = machine.Pin(temperature_pin)
-ds_sensor = ds18x20.DS18X20(onewire.OneWire(ds_pin))
-roms = ds_sensor.scan()
-print('Found DS devices: ', roms)
+try:
+    ds_pin = machine.Pin(temperature_pin)
+    ds_sensor = ds18x20.DS18X20(onewire.OneWire(ds_pin))
+    roms = ds_sensor.scan()
+    print('Found DS devices: ', roms)
+except Exception as e:
+    print("No temperature sensor found")
+    print(e)
+    oled.fill(0)
+    oled.show()
+    oled.text('No temp', 5, 5)
+    oled.text('sensor found', 5, 25)
+    oled.show()
 open_windows = False
 close_windows = True
 try:
